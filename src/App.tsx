@@ -10,6 +10,7 @@ import Attendance from "./pages/Attendance";
 import Fees from "./pages/Fees";
 import Remarks from "./pages/Remarks";
 import AIHelp from "./pages/AIHelp";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,17 +21,25 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/students" element={<Students />} />
-            <Route path="/attendance" element={<Attendance />} />
-            <Route path="/fees" element={<Fees />} />
-            <Route path="/remarks" element={<Remarks />} />
-            <Route path="/ai-help" element={<AIHelp />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="/auth" element={<Auth />} />
+          <Route
+            path="/*"
+            element={
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/students" element={<Students />} />
+                  <Route path="/attendance" element={<Attendance />} />
+                  <Route path="/fees" element={<Fees />} />
+                  <Route path="/remarks" element={<Remarks />} />
+                  <Route path="/ai-help" element={<AIHelp />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Layout>
+            }
+          />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
