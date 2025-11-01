@@ -14,7 +14,141 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      attendance: {
+        Row: {
+          created_at: string | null
+          date: string
+          id: string
+          status: string
+          student_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          date: string
+          id?: string
+          status: string
+          student_id: string
+        }
+        Update: {
+          created_at?: string | null
+          date?: string
+          id?: string
+          status?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fees: {
+        Row: {
+          amount: number
+          created_at: string | null
+          due_date: string
+          id: string
+          paid_date: string | null
+          status: string
+          student_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          due_date: string
+          id?: string
+          paid_date?: string | null
+          status?: string
+          student_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          due_date?: string
+          id?: string
+          paid_date?: string | null
+          status?: string
+          student_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fees_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      remarks: {
+        Row: {
+          created_at: string | null
+          id: string
+          remark: string
+          student_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          remark: string
+          student_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          remark?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "remarks_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      students: {
+        Row: {
+          address: string
+          created_at: string | null
+          enrolled_date: string | null
+          id: string
+          name: string
+          parent_name: string
+          parent_phone: string
+          updated_at: string | null
+        }
+        Insert: {
+          address: string
+          created_at?: string | null
+          enrolled_date?: string | null
+          id?: string
+          name: string
+          parent_name: string
+          parent_phone: string
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string
+          created_at?: string | null
+          enrolled_date?: string | null
+          id?: string
+          name?: string
+          parent_name?: string
+          parent_phone?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
