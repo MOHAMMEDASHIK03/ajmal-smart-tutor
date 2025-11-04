@@ -129,24 +129,28 @@ const Attendance = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-3xl font-bold text-foreground">Attendance</h2>
-          <p className="text-muted-foreground flex items-center gap-2">
-            <History className="w-4 h-4" />
-            View and manage attendance records
-          </p>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="min-w-0">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+              {selectedDate !== today ? "Attendance History" : "Mark Attendance"}
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground flex items-center gap-2">
+              <History className="w-4 h-4 shrink-0" />
+              {selectedDate !== today ? "View past attendance records" : "Track daily student attendance"}
+            </p>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <CalendarIcon className="w-4 h-4 text-muted-foreground" />
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 flex-1 sm:flex-none">
+            <CalendarIcon className="w-4 h-4 text-muted-foreground shrink-0" />
             <Input
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
               max={today}
-              className="w-auto"
+              className="flex-1 sm:w-auto min-h-[44px]"
             />
           </div>
           {isToday && (
@@ -154,6 +158,7 @@ const Attendance = () => {
               variant="accent"
               onClick={saveAttendance}
               disabled={saving}
+              className="min-h-[44px] w-full sm:w-auto"
             >
               {saving ? "Saving..." : "Save Attendance"}
             </Button>
@@ -161,64 +166,64 @@ const Attendance = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4">
-            <div className="bg-success p-3 rounded-lg">
-              <CheckCircle2 className="w-8 h-8 text-white" />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+        <Card className="p-4 sm:p-6 shadow-card">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="bg-success p-2 sm:p-3 rounded-lg shrink-0">
+              <CheckCircle2 className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">{stats.present}</p>
-              <p className="text-sm text-muted-foreground">Present Today</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4">
-            <div className="bg-destructive p-3 rounded-lg">
-              <XCircle className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">{stats.absent}</p>
-              <p className="text-sm text-muted-foreground">Absent Today</p>
+            <div className="min-w-0">
+              <p className="text-xl sm:text-2xl font-bold text-foreground">{stats.present}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Present Today</p>
             </div>
           </div>
         </Card>
 
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4">
-            <div className="bg-primary p-3 rounded-lg">
-              <CalendarIcon className="w-8 h-8 text-white" />
+        <Card className="p-4 sm:p-6 shadow-card">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="bg-destructive p-2 sm:p-3 rounded-lg shrink-0">
+              <XCircle className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">{students.length}</p>
-              <p className="text-sm text-muted-foreground">Total Students</p>
+            <div className="min-w-0">
+              <p className="text-xl sm:text-2xl font-bold text-foreground">{stats.absent}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Absent Today</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-4 sm:p-6 shadow-card">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="bg-primary p-2 sm:p-3 rounded-lg shrink-0">
+              <CalendarIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xl sm:text-2xl font-bold text-foreground">{students.length}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Total Students</p>
             </div>
           </div>
         </Card>
       </div>
 
       {students.length === 0 ? (
-        <Card className="p-12 text-center shadow-card">
-          <p className="text-muted-foreground text-lg">No students enrolled</p>
-          <p className="text-sm text-muted-foreground mt-2">
+        <Card className="p-8 sm:p-12 text-center shadow-card">
+          <p className="text-muted-foreground text-base sm:text-lg">No students enrolled</p>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-2">
             Add students first to mark attendance
           </p>
         </Card>
       ) : (
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold">
+        <Card className="p-4 sm:p-6 shadow-card">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl font-semibold">
               {isToday ? "Mark Attendance" : "Attendance History"}
             </h3>
             {!isToday && (
-              <span className="text-sm text-muted-foreground">
+              <span className="text-xs sm:text-sm text-muted-foreground">
                 Viewing: {format(new Date(selectedDate), "MMMM dd, yyyy")}
               </span>
             )}
           </div>
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {students.map((student) => {
               const studentAttendance = attendance.find(
                 (a) => a.student_id === student.id
@@ -228,25 +233,27 @@ const Attendance = () => {
               return (
                 <div
                   key={student.id}
-                  className="flex items-center justify-between p-4 bg-muted rounded-lg hover:bg-accent transition-smooth"
+                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 p-3 sm:p-4 bg-muted rounded-lg hover:bg-accent transition-smooth"
                 >
-                  <span className="font-medium">{student.name}</span>
+                  <span className="font-medium text-sm sm:text-base">{student.name}</span>
                   {isToday ? (
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 w-full sm:w-auto">
                       <Button
                         variant={isPresent ? "success" : "outline"}
                         size="sm"
                         onClick={() => toggleAttendance(student.id)}
+                        className="flex-1 sm:flex-none min-h-[44px] text-xs sm:text-sm"
                       >
-                        <CheckCircle2 className="w-4 h-4 mr-2" />
+                        <CheckCircle2 className="w-4 h-4 mr-1 sm:mr-2" />
                         Present
                       </Button>
                       <Button
                         variant={!isPresent ? "destructive" : "outline"}
                         size="sm"
                         onClick={() => toggleAttendance(student.id)}
+                        className="flex-1 sm:flex-none min-h-[44px] text-xs sm:text-sm"
                       >
-                        <XCircle className="w-4 h-4 mr-2" />
+                        <XCircle className="w-4 h-4 mr-1 sm:mr-2" />
                         Absent
                       </Button>
                     </div>
@@ -254,13 +261,13 @@ const Attendance = () => {
                     <div className="flex items-center gap-2">
                       {isPresent ? (
                         <>
-                          <CheckCircle2 className="w-5 h-5 text-success" />
-                          <span className="text-success font-medium">Present</span>
+                          <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-success" />
+                          <span className="text-success font-medium text-sm sm:text-base">Present</span>
                         </>
                       ) : (
                         <>
-                          <XCircle className="w-5 h-5 text-destructive" />
-                          <span className="text-destructive font-medium">Absent</span>
+                          <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-destructive" />
+                          <span className="text-destructive font-medium text-sm sm:text-base">Absent</span>
                         </>
                       )}
                     </div>

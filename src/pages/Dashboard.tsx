@@ -86,27 +86,27 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h2 className="text-3xl font-bold text-foreground">Dashboard</h2>
-        <p className="text-muted-foreground">Overview of your tuition center</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Dashboard</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">Overview of your tuition center</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
         {statCards.map((stat, index) => {
           const Icon = stat.icon;
           return (
             <Card
               key={index}
-              className="p-6 shadow-card hover:shadow-elegant transition-smooth"
+              className="p-3 sm:p-4 md:p-6 shadow-card hover:shadow-elegant transition-smooth"
             >
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
-                  <p className="text-3xl font-bold text-foreground">{stat.value}</p>
+              <div className="flex flex-col sm:flex-row items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">{stat.label}</p>
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground truncate">{stat.value}</p>
                 </div>
-                <div className={`${stat.color} p-3 rounded-lg`}>
-                  <Icon className="w-6 h-6 text-white" />
+                <div className={`${stat.color} p-2 sm:p-3 rounded-lg shrink-0`}>
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
                 </div>
               </div>
             </Card>
@@ -114,29 +114,29 @@ const Dashboard = () => {
         })}
       </div>
 
-      <Card className="p-6 shadow-card">
-        <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <Card className="p-4 sm:p-6 shadow-card">
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Quick Actions</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <a
             href="/students"
-            className="p-4 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-smooth text-center"
+            className="p-3 sm:p-4 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-smooth text-center min-h-[88px] flex flex-col items-center justify-center"
           >
-            <Users className="w-8 h-8 mx-auto mb-2" />
-            <p className="font-medium">Manage Students</p>
+            <Users className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-2" />
+            <p className="font-medium text-sm sm:text-base">Manage Students</p>
           </a>
           <a
             href="/attendance"
-            className="p-4 bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-smooth text-center"
+            className="p-3 sm:p-4 bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-smooth text-center min-h-[88px] flex flex-col items-center justify-center"
           >
-            <Calendar className="w-8 h-8 mx-auto mb-2" />
-            <p className="font-medium">Mark Attendance</p>
+            <Calendar className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-2" />
+            <p className="font-medium text-sm sm:text-base">Mark Attendance</p>
           </a>
           <a
             href="/fees"
-            className="p-4 bg-gradient-accent text-accent-foreground rounded-lg hover:opacity-90 transition-smooth text-center"
+            className="p-3 sm:p-4 bg-gradient-accent text-accent-foreground rounded-lg hover:opacity-90 transition-smooth text-center min-h-[88px] flex flex-col items-center justify-center"
           >
-            <DollarSign className="w-8 h-8 mx-auto mb-2" />
-            <p className="font-medium">Track Fees</p>
+            <DollarSign className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-2" />
+            <p className="font-medium text-sm sm:text-base">Track Fees</p>
           </a>
         </div>
       </Card>

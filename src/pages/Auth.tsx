@@ -114,20 +114,20 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8 shadow-elegant">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-4">
-            <GraduationCap className="w-8 h-8 text-primary-foreground" />
+    <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-3 sm:p-4">
+      <Card className="w-full max-w-md p-4 sm:p-6 md:p-8 shadow-elegant">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-primary rounded-full mb-3 sm:mb-4">
+            <GraduationCap className="w-7 h-7 sm:w-8 sm:h-8 text-primary-foreground" />
           </div>
-          <h1 className="text-2xl font-bold text-foreground">Ajmal Akeel Tuition Center</h1>
-          <p className="text-muted-foreground mt-2">Tutor Access Portal</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground">Ajmal Akeel Tuition Center</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">Tutor Access Portal</p>
         </div>
 
         <Tabs defaultValue="signin" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="signin">Sign In</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-6 h-11">
+            <TabsTrigger value="signin" className="text-sm sm:text-base">Sign In</TabsTrigger>
+            <TabsTrigger value="signup" className="text-sm sm:text-base">Sign Up</TabsTrigger>
           </TabsList>
 
           <TabsContent value="signin">
@@ -156,7 +156,7 @@ const Auth = () => {
               </div>
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full min-h-[44px] text-sm sm:text-base"
                 variant="accent"
                 disabled={loading}
               >
@@ -205,7 +205,7 @@ const Auth = () => {
               </div>
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full min-h-[44px] text-sm sm:text-base"
                 variant="accent"
                 disabled={loading}
               >

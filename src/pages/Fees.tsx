@@ -184,17 +184,17 @@ const Fees = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold text-foreground">Fees Management</h2>
-          <p className="text-muted-foreground">Track and manage student fees</p>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="min-w-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Fee Management</h2>
+          <p className="text-sm sm:text-base text-muted-foreground">Track and manage student payments</p>
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button variant="accent" className="gap-2">
+            <Button variant="accent" className="gap-2 min-h-[44px] shrink-0 w-full sm:w-auto">
               <DollarSign className="w-4 h-4" />
-              Add Fee Record
+              <span className="text-sm sm:text-base">Add Fee Record</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -255,87 +255,89 @@ const Fees = () => {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="bg-primary p-3 rounded-lg">
-              <DollarSign className="w-6 h-6 text-white" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+        <Card className="p-3 sm:p-4 md:p-6 shadow-card">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+            <div className="bg-primary p-2 sm:p-3 rounded-lg shrink-0">
+              <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
             </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">₹{totalFeesAmount.toLocaleString()}</p>
-              <p className="text-sm text-muted-foreground">Total Fees</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="bg-destructive p-3 rounded-lg">
-              <DollarSign className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">₹{pendingFeesAmount.toLocaleString()}</p>
-              <p className="text-sm text-muted-foreground">Pending Fees</p>
+            <div className="min-w-0">
+              <p className="text-base sm:text-xl md:text-2xl font-bold text-foreground truncate">₹{totalFeesAmount.toLocaleString()}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Total Fees</p>
             </div>
           </div>
         </Card>
 
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="bg-success p-3 rounded-lg">
-              <DollarSign className="w-6 h-6 text-white" />
+        <Card className="p-3 sm:p-4 md:p-6 shadow-card">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+            <div className="bg-destructive p-2 sm:p-3 rounded-lg shrink-0">
+              <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
             </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">₹{collectedFeesAmount.toLocaleString()}</p>
-              <p className="text-sm text-muted-foreground">Collected Fees</p>
+            <div className="min-w-0">
+              <p className="text-base sm:text-xl md:text-2xl font-bold text-foreground truncate">₹{pendingFeesAmount.toLocaleString()}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Pending Fees</p>
             </div>
           </div>
         </Card>
 
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="bg-accent p-3 rounded-lg">
-              <CheckCircle className="w-6 h-6 text-white" />
+        <Card className="p-3 sm:p-4 md:p-6 shadow-card">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+            <div className="bg-success p-2 sm:p-3 rounded-lg shrink-0">
+              <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
             </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">{paidFees.length}/{fees.length}</p>
-              <p className="text-sm text-muted-foreground">Payment Rate</p>
+            <div className="min-w-0">
+              <p className="text-base sm:text-xl md:text-2xl font-bold text-foreground truncate">₹{collectedFeesAmount.toLocaleString()}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Collected Fees</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-3 sm:p-4 md:p-6 shadow-card">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+            <div className="bg-accent p-2 sm:p-3 rounded-lg shrink-0">
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-base sm:text-xl md:text-2xl font-bold text-foreground truncate">{paidFees.length}/{fees.length}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Payment Rate</p>
             </div>
           </div>
         </Card>
       </div>
 
       {unpaidFees.length > 0 && (
-        <Card className="p-6 shadow-card">
-          <h3 className="text-xl font-semibold mb-4 text-destructive">Unpaid Fees</h3>
-          <div className="space-y-4">
+        <Card className="p-4 sm:p-6 shadow-card">
+          <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-destructive">Unpaid Fees</h3>
+          <div className="space-y-3 sm:space-y-4">
             {unpaidFees.map((fee) => (
               <div
                 key={fee.id}
-                className="flex items-center justify-between p-4 bg-muted rounded-lg"
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 sm:p-4 bg-muted rounded-lg"
               >
-                <div>
-                  <p className="font-semibold">{fee.students.name}</p>
-                  <p className="text-sm text-muted-foreground">
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-sm sm:text-base">{fee.students.name}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Amount: ₹{fee.amount} | Due: {new Date(fee.due_date).toLocaleDateString()}
                   </p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full sm:w-auto shrink-0">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => sendWhatsAppReminder(fee)}
-                    className="gap-2"
+                    className="gap-1 sm:gap-2 flex-1 sm:flex-none min-h-[44px] text-xs sm:text-sm"
                   >
-                    <Send className="w-4 h-4" />
-                    Send Reminder
+                    <Send className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="hidden sm:inline">Send Reminder</span>
+                    <span className="sm:hidden">Remind</span>
                   </Button>
                   <Button
                     variant="success"
                     size="sm"
                     onClick={() => markAsPaid(fee.id)}
+                    className="flex-1 sm:flex-none min-h-[44px] text-xs sm:text-sm"
                   >
-                    Mark as Paid
+                    Mark Paid
                   </Button>
                 </div>
               </div>
@@ -345,21 +347,21 @@ const Fees = () => {
       )}
 
       {paidFees.length > 0 && (
-        <Card className="p-6 shadow-card">
-          <h3 className="text-xl font-semibold mb-4 text-success">Paid Fees</h3>
-          <div className="space-y-3">
+        <Card className="p-4 sm:p-6 shadow-card">
+          <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-success">Paid Fees</h3>
+          <div className="space-y-2 sm:space-y-3">
             {paidFees.map((fee) => (
               <div
                 key={fee.id}
-                className="flex items-center justify-between p-4 bg-muted rounded-lg"
+                className="flex items-center justify-between gap-2 p-3 sm:p-4 bg-muted rounded-lg"
               >
-                <div>
-                  <p className="font-semibold">{fee.students.name}</p>
-                  <p className="text-sm text-muted-foreground">
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-sm sm:text-base truncate">{fee.students.name}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Amount: ₹{fee.amount} | Paid: {new Date(fee.paid_date!).toLocaleDateString()}
                   </p>
                 </div>
-                <CheckCircle className="w-6 h-6 text-success" />
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-success shrink-0" />
               </div>
             ))}
           </div>

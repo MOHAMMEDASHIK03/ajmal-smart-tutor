@@ -132,17 +132,17 @@ const Students = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold text-foreground">Students</h2>
-          <p className="text-muted-foreground">Manage your enrolled students</p>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="min-w-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Students</h2>
+          <p className="text-sm sm:text-base text-muted-foreground">Manage your enrolled students</p>
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button variant="accent" className="gap-2">
+            <Button variant="accent" className="gap-2 min-h-[44px] shrink-0 w-full sm:w-auto">
               <Plus className="w-4 h-4" />
-              Add Student
+              <span className="text-sm sm:text-base">Add Student</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
