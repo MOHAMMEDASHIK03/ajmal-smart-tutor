@@ -167,6 +167,10 @@ const Fees = () => {
 
   const unpaidFees = fees.filter((f) => f.status === "not_paid");
   const paidFees = fees.filter((f) => f.status === "paid");
+  
+  const totalFeesAmount = fees.reduce((sum, f) => sum + Number(f.amount), 0);
+  const pendingFeesAmount = unpaidFees.reduce((sum, f) => sum + Number(f.amount), 0);
+  const collectedFeesAmount = paidFees.reduce((sum, f) => sum + Number(f.amount), 0);
 
   if (loading) {
     return (
@@ -251,15 +255,27 @@ const Fees = () => {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <Card className="p-6 shadow-card">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="bg-primary p-3 rounded-lg">
+              <DollarSign className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-foreground">₹{totalFeesAmount.toLocaleString()}</p>
+              <p className="text-sm text-muted-foreground">Total Fees</p>
+            </div>
+          </div>
+        </Card>
+
         <Card className="p-6 shadow-card">
           <div className="flex items-center gap-4 mb-2">
             <div className="bg-destructive p-3 rounded-lg">
               <DollarSign className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{unpaidFees.length}</p>
-              <p className="text-sm text-muted-foreground">Unpaid Fees</p>
+              <p className="text-2xl font-bold text-foreground">₹{pendingFeesAmount.toLocaleString()}</p>
+              <p className="text-sm text-muted-foreground">Pending Fees</p>
             </div>
           </div>
         </Card>
@@ -267,11 +283,23 @@ const Fees = () => {
         <Card className="p-6 shadow-card">
           <div className="flex items-center gap-4 mb-2">
             <div className="bg-success p-3 rounded-lg">
+              <DollarSign className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-foreground">₹{collectedFeesAmount.toLocaleString()}</p>
+              <p className="text-sm text-muted-foreground">Collected Fees</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-6 shadow-card">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="bg-accent p-3 rounded-lg">
               <CheckCircle className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{paidFees.length}</p>
-              <p className="text-sm text-muted-foreground">Paid Fees</p>
+              <p className="text-2xl font-bold text-foreground">{paidFees.length}/{fees.length}</p>
+              <p className="text-sm text-muted-foreground">Payment Rate</p>
             </div>
           </div>
         </Card>

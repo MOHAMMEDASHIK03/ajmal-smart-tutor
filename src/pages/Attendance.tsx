@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle2, XCircle, Calendar as CalendarIcon } from "lucide-react";
+import { CheckCircle2, XCircle, Calendar as CalendarIcon, History } from "lucide-react";
 import { format } from "date-fns";
 
 interface Student {
@@ -23,11 +24,13 @@ const Attendance = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [stats, setStats] = useState({ present: 0, absent: 0 });
+  const [selectedDate, setSelectedDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const today = format(new Date(), "yyyy-MM-dd");
+  const isToday = selectedDate === today;
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [selectedDate]);
 
   useEffect(() => {
     const present = attendance.filter((a) => a.status === "present").length;
@@ -47,7 +50,7 @@ const Attendance = () => {
       const { data: attendanceData } = await supabase
         .from("attendance")
         .select("student_id, status")
-        .eq("date", today);
+        .eq("date", selectedDate);
 
       setStudents(studentsData || []);
       
@@ -88,7 +91,7 @@ const Attendance = () => {
     try {
       const records = attendance.map((a) => ({
         student_id: a.student_id,
-        date: today,
+        date: selectedDate,
         status: a.status,
       }));
 
@@ -127,21 +130,35 @@ const Attendance = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-bold text-foreground">Attendance</h2>
           <p className="text-muted-foreground flex items-center gap-2">
-            <CalendarIcon className="w-4 h-4" />
-            {format(new Date(), "MMMM dd, yyyy")}
+            <History className="w-4 h-4" />
+            View and manage attendance records
           </p>
         </div>
-        <Button
-          variant="accent"
-          onClick={saveAttendance}
-          disabled={saving}
-        >
-          {saving ? "Saving..." : "Save Attendance"}
-        </Button>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <CalendarIcon className="w-4 h-4 text-muted-foreground" />
+            <Input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              max={today}
+              className="w-auto"
+            />
+          </div>
+          {isToday && (
+            <Button
+              variant="accent"
+              onClick={saveAttendance}
+              disabled={saving}
+            >
+              {saving ? "Saving..." : "Save Attendance"}
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -191,7 +208,16 @@ const Attendance = () => {
         </Card>
       ) : (
         <Card className="p-6 shadow-card">
-          <h3 className="text-xl font-semibold mb-4">Mark Attendance</h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold">
+              {isToday ? "Mark Attendance" : "Attendance History"}
+            </h3>
+            {!isToday && (
+              <span className="text-sm text-muted-foreground">
+                Viewing: {format(new Date(selectedDate), "MMMM dd, yyyy")}
+              </span>
+            )}
+          </div>
           <div className="space-y-3">
             {students.map((student) => {
               const studentAttendance = attendance.find(
@@ -205,24 +231,40 @@ const Attendance = () => {
                   className="flex items-center justify-between p-4 bg-muted rounded-lg hover:bg-accent transition-smooth"
                 >
                   <span className="font-medium">{student.name}</span>
-                  <div className="flex gap-2">
-                    <Button
-                      variant={isPresent ? "success" : "outline"}
-                      size="sm"
-                      onClick={() => toggleAttendance(student.id)}
-                    >
-                      <CheckCircle2 className="w-4 h-4 mr-2" />
-                      Present
-                    </Button>
-                    <Button
-                      variant={!isPresent ? "destructive" : "outline"}
-                      size="sm"
-                      onClick={() => toggleAttendance(student.id)}
-                    >
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Absent
-                    </Button>
-                  </div>
+                  {isToday ? (
+                    <div className="flex gap-2">
+                      <Button
+                        variant={isPresent ? "success" : "outline"}
+                        size="sm"
+                        onClick={() => toggleAttendance(student.id)}
+                      >
+                        <CheckCircle2 className="w-4 h-4 mr-2" />
+                        Present
+                      </Button>
+                      <Button
+                        variant={!isPresent ? "destructive" : "outline"}
+                        size="sm"
+                        onClick={() => toggleAttendance(student.id)}
+                      >
+                        <XCircle className="w-4 h-4 mr-2" />
+                        Absent
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      {isPresent ? (
+                        <>
+                          <CheckCircle2 className="w-5 h-5 text-success" />
+                          <span className="text-success font-medium">Present</span>
+                        </>
+                      ) : (
+                        <>
+                          <XCircle className="w-5 h-5 text-destructive" />
+                          <span className="text-destructive font-medium">Absent</span>
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
