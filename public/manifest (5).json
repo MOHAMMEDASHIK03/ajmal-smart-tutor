@@ -1,54 +1,29 @@
 {
-  "background_color": "#ffffff",
-  "description": "Tuition center student management app for attendance, fees &amp; student progress.",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "Smart Tutor App",
-  "orientation": "any",
-  "scope": "/",
-  "short_name": "SmartTutorcom.smarttutor.pwa",
+  "short_name": "SmartTutor",
+  "id": "com.smarttutor.pwa",
+  "description": "Tuition center student management app for attendance, fees & student progress.",
   "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
   "theme_color": "#ffffff",
+  "orientation": "any",
   "icons": [
     {
-      "src": "https://ajmal-smart-tutor.vercel.app/icon-192.png",
-      "type": "image/png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
-      "isSquare": true,
-      "isPng": true,
-      "isWebp": false,
-      "isJpg": false,
-      "width": 192,
-      "is512x512": false,
-      "is256x256": false,
-      "is192x192": true
+      "type": "image/png"
     },
     {
-      "src": "https://lovable.dev/opengraph-image-p98pqg.png",
-      "type": "image/png",
-      "sizes": "1200x629",
-      "isSquare": false,
-      "isPng": true,
-      "isWebp": false,
-      "isJpg": false,
-      "width": 1200,
-      "is512x512": false,
-      "is256x256": false,
-      "is192x192": false
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     },
     {
-      "src": "https://ajmal-smart-tutor.vercel.app/favicon.ico",
-      "type": "image/x-icon",
-      "sizes": "73x74",
-      "isSquare": false,
-      "isPng": false,
-      "isWebp": false,
-      "isJpg": false,
-      "width": 73,
-      "is512x512": false,
-      "is256x256": false,
-      "is192x192": false
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
-  ],
-  "id": "com.smarttutor.pwa"
+  ]
 }
